@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .image-item {
+        width: 300px;
+        height: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      data-src="
+  https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/20220618122345.png"
+      class="image-item"
+    />
+    <img
+      data-src="
+   https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/0A61BC01.png"
+      class="image-item"
+    />
+    <img
+      data-src="
+  https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/0AB6B443.jpg"
+      class="image-item"
+    />
+    <img
+      data-src="
+  https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/160_example_1.png"
+      class="image-item"
+    />
+    <img
+      data-src="
+  https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/201.png"
+      class="image-item"
+    />
+    <img
+      data-src="
+  https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/20200804111327945.png"
+      class="image-item"
+    />
+    <img
+      data-src="
+  https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/202110232213089.png"
+      class="image-item"
+    />
+    <img
+      data-src="
+  https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/202110232214085.png"
+      class="image-item"
+    />
+    <img
+      data-src="
+  https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/202111031640227.png"
+      class="image-item"
+    />
+    <img
+      data-src="
+  https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/202111141938515.png"
+      class="image-item"
+    />
+    <img
+      data-src="
+  https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/202111142121762.png"
+      class="image-item"
+    />
+    <img
+      data-src="
+  https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/202111142136541.png"
+      class="image-item"
+    />
+    <img
+      data-src="
+  https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/202111142205048.png"
+      class="image-item"
+    />
+    <img
+      data-src="
+  https://ruoruochen-img-bed.oss-cn-beijing.aliyuncs.com/img/balance_1.jpg"
+      class="image-item"
+    />
+    <script>
+      // 方案一：getBoundingClientRect + dataset
+      const viewHeight = document.documentElement.clientHeight;
+      const lazyLoadWithGetBoundingRect = () => {
+        // 获取当前页面所有img元素
+        const images = document.querySelectorAll("img[data-src]");
+        // 遍历元素 判断是否在视口中
+        images.forEach((img) => {
+          if (!img.hasAttribute("data-src") || img.dataset.src === "") {
+            return;
+          }
+          const imgRect = img.getBoundingClientRect();
+          if (imgRect.top < viewHeight) {
+            img.src = img.dataset.src;
+            // 移除属性 防止重复遍历
+            img.removeAttribute("data-src");
+          }
+        });
+      };
+      // 监听滚动
+      document.addEventListener("scroll", lazyLoadWithGetBoundingRect);
+      // 初始化时，手动触发一次lazyLoad
+      lazyLoadWithGetBoundingRect();
+    </script>
+  </body>
+</html>
